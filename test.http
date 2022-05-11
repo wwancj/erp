@@ -1,0 +1,96 @@
+@url=http://127.0.0.1:7777
+@json=Content-Type: application/json
+
+
+
+
+### 查询所有用户
+
+get {{url}}/get_emali/users
+
+
+### 查询当前注册用户
+
+
+
+
+
+### 错误请求响应
+
+get {{url}}/hxxx
+
+
+### 登录接口
+
+post {{url}}/login
+{{json}}
+
+{"user":"kfroot","password":"kfroot"}
+
+
+
+### 用户信息获取
+get {{url}}/info HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjc4MWRjZGZkNDBhYWM5MTA2MTgxZCIsInVzZXIiOiJyb290IiwiZGVwYXJ0bWVudCI6IuaXoCIsInBvc2l0aW9uIjoi5pegIiwiaWF0IjoxNjUxNTQ0NTAyfQ.FLT42guj1Om5FbzHDziAcykDB6N5c1DR0ClEv2CrN5s
+
+
+
+### 获取用户
+
+post {{url}}/get_user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmJiNTU4OTk0NDZkNWVkYmI5YzA1NSIsInVzZXIiOiJrZnJvb3QiLCJkZXBhcnRtZW50Ijoi5byA5Y-R6YOoIiwicG9zaXRpb24iOiLnu4_nkIYiLCJpYXQiOjE2NTE1NDc0NTJ9.72s5w3KGxAnEncCRmoJJtThxT5O4nN2FsoyG8sj0RGs
+{{json}}
+
+
+### 修改用户
+
+POST {{url}}/updata_user HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjc4MWRjZGZkNDBhYWM5MTA2MTgxZCIsInVzZXIiOiJyb290IiwiZGVwYXJ0bWVudCI6IuaXoCIsInBvc2l0aW9uIjoi5pegIiwiaWF0IjoxNjUxNTQxMzY4fQ.OKf7_VOAxXo_UFEtHMzSwckdiT25JCrlWxnemFL1Tos
+{{json}}
+
+{"old":{"_id":"6267625e70b772d87bc896eb"},"_new":{
+    "department":"开发部",
+    "user":"kffdg1ww23",
+    "position":"组长",
+    "password":"kffdg1ww23"
+}}
+
+
+### 修改密码
+post {{url}}/updata_pws
+
+
+### 获取验证码
+post  {{url}}/get_email HTTP/1.1
+{{json}}
+
+{"email":"1363585100@qq.com"}
+
+
+### 获取当前注册用户
+post  {{url}}/get_emali/users HTTP/1.1
+{{json}}
+
+{"email":"2837123860@qq.com","verify":6240126,"password":"4567"}
+
+
+
+### 注册
+post {{url}}/register
+{{json}}
+
+
+{"email":"13635851777777009@qq.com","verify":624016,"password":"4567"}
+
+### root获取用户
+
+get {{url}}/findAll
+
+
+
+### kk
+get {{url}}/kk
+{{json}}
+
+
+{"name":"万楚军"}
