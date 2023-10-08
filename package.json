@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "api": "apidoc -i Router/ -o public/api/"
+    "api": "apidoc -i Router/ -o public/api/",
+    "serve":"nodemon index"
+
   },
   "author": "",
   "license": "ISC",

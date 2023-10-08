@@ -27,45 +27,52 @@
  * @apiSampleRequest http://127.0.0.1:7777/login
  */
 
+const jwt = require("jsonwebtoken");
+const { User } = require("../db/db.js");
 
-const jwt = require("jsonwebtoken")
-const { User } = require("../db/db.js")
+const bcrypt = require("bcrypt");
+const tokenScreen = process.env.tokenScreen;
 
-const bcrypt = require("bcrypt")
-const tokenScreen=process.env.tokenScreen
-
-
-const express=require("express")
-const Login=express.Router()
+const express = require("express");
+const Login = express.Router();
 Login.post("/login", async (req, res, next) => {
-    const { user, password } = req.body
+  const { user, password } = req.body;
 
+  const current_user = await User.findOne({ user });
 
+  if (current_user) {
+    const compare_res = await bcrypt.compareSync(
+      password,
+      current_user.password
+    );
+    console.log("密码正确", compare_res);
 
-    const current_user = await User.findOne({ user })
- 
-    if (current_user) {
-        const compare_res = await bcrypt.compareSync(password, current_user.password)
-        console.log("密码正确",compare_res);
+    if (compare_res) {
+      //token 加密  message 经过加密后发送给 用户
+      let message = {
+        id: String(current_user._id),
+        user: current_user.user,
+        department: current_user.department,
+        position: current_user.position,
+      };
 
-        if (compare_res) {
-            //token 加密  message 经过加密后发送给 用户
-            let message = { id: String(current_user._id),user: current_user.user,department:current_user.department,position:current_user.position}
+      // token 为  message 加密后的密文
+      let token = jwt.sign(message, tokenScreen);
 
-            // token 为  message 加密后的密文
-            let token = jwt.sign(message, tokenScreen)
-
-
-
-            res.send({ user: current_user.user, id: current_user._id, token,department:current_user.department,position:current_user.position,result:"登录成功"})
-        } else {
-            res.send({ message: "密码错误" })
-        }
-
+      res.send({
+        user: current_user.user,
+        id: current_user._id,
+        token,
+        department: current_user.department,
+        position: current_user.position,
+        result: "登录成功",
+      });
     } else {
-        res.send({ message: "用户不存在" })
+      res.send({ message: "密码错误" });
     }
+  } else {
+    res.send({ message: "用户不存在" });
+  }
+});
 
-})
-
-module.exports= Login
+module.exports = Login;

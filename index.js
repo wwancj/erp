@@ -21,6 +21,12 @@ app.use(express.static(path.join(__dirname, "public")))
 
 
 
+app.get("/kk",(req,res)=>{
+    res.send(a++)
+})
+
+
+
 
 //单独存放在 .env
 // const tokenScreen = "ertertsdfgsdg3457%gd"
@@ -43,14 +49,14 @@ app.get("/findAll",async (req,res)=>{
 })
 
 
-app.get("/kk",(req,res)=>{
-    res.send(req.body.name)
-})
 
 
 
 // 权限判断中间件
 const { jwt_token } = require("./Middleware/token.js")
+
+
+
 
 
 
@@ -69,9 +75,16 @@ app.get("/info", jwt_token, (res, req, next) => {
 
 
 
-app.get("/index", (rsp, req, next) => {
+//公告内容
 
-    req.send("ok")
+require("./Router/announcement/announcement")
+
+
+
+  let a=1
+app.get("/index", (rsp, req, next) => {
+   a++
+    req.status(300).send("ppp")
 
 })
 
@@ -137,8 +150,8 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(8877, "0.0.0.0", function () {
-    console.log("app run in 127.0.0.1:8877");
+app.listen(7777, "0.0.0.0", function () {
+    console.log("app run in 127.0.0.1:7777");
 })
 
 

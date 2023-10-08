@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 
-const Login=express.Router()
-Login.get("",()=>{})
+const Login = express.Router();
+Login.get("", () => {});

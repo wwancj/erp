@@ -12,13 +12,11 @@ const announcement_Schema=new mongoose.Schema({
   //发布时间
   publish_time:{type:Date,default:Date.now},
   //发布者
-  publisher:{type:String},
+  publisher:{type:String,required: true},
   //是否撤销
   if_cancel:{type:Boolean,default:false},
   //撤销时间
   cancel_time:{type:Date,default:null},
-
-
   //优先级
   priority:{type:String},
   //接受者类型
@@ -40,10 +38,10 @@ const Announcement=mongoose.model("announcement",announcement_Schema)
 // })
 // console.log();
 
-let a=async function(){
- let res= await Announcement.find()
- console.log(res);
-} 
+// let a=async function(){
+//  let res= await Announcement.find()
+//  console.log(res);
+// } 
 // a()
 module.exports={Announcement}
 
